@@ -74,9 +74,14 @@ set(DCM2NIIX_SRCS
     nifti1_io_core.cpp
     nii_foreign.cpp
     nii_ortho.cpp
-    nii_dicom_batch.cpp
-    cJSON.c
-    base64.c)
+    nii_dicom_batch.cpp)
+
+
+option(USE_JNIfTI "Build with JNIfTI support" ON)
+if(USE_JNIFTI)
+    add_definitions(-DmyEnableJNIfTI)
+    set(DCM2NIIX_SRCS ${DCM2NIIX_SRCS} cJSON.cpp base64.cpp)
+endif()
 
 option(USE_JPEGLS "Build with JPEG-LS support using CharLS" OFF)
 if(USE_JPEGLS)
